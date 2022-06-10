@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title >Restaurants</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let restaurant of restaurant" [routerLink]="['/', 'restaurants', restaurant.restaurantId]" routerDirection="forward" detail="">
+            <ion-thumbnail>
+              <img [src]="restaurant.img"/>
+            </ion-thumbnail>
+            <ion-label class="ion-padding">
+              <h2>{{restaurant.name}}</h2>
+              <p>{{restaurant.description}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+
+

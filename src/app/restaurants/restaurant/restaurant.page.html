@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/restaurants"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{restaurant.name}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card >
+    <img [src]="restaurant.img" class="rounded-top shadow mx-auto d-block"/>
+    <ion-card-header>
+      <ion-card-subtitle>{{restaurant.description}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating" >Inserisci il numero</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

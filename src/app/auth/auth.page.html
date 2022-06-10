@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/restaurants"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div *ngIf="!account.accountIsAuth" >
+      <div *ngIf="loading" class="ion-text-center ion-padding">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+      <div *ngIf="!loading" class="ion-text-center ion-padding">
+        <ion-button (click)="login()">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label class="ion-padding-start">Login</ion-label>
+        </ion-button>
+      </div>
+    </div>
+    <div *ngIf="account.accountIsAuth">
+      <ion-avatar class="mx-auto d-block m-4">
+        <ion-img [src]="account.img"></ion-img>
+      </ion-avatar>
+      <ion-item>
+        <ion-label>{{account.name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{account.lastName}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-button (click)="logOut()" expand="block" fill="clear" shape="round">
+          <ion-icon name="log-out-outline"></ion-icon>
+          <ion-label class="ion-padding-start">LogOut</ion-label>
+        </ion-button>
+      </ion-item>
+    </div>
+  </ion-card>
+
+</ion-content>

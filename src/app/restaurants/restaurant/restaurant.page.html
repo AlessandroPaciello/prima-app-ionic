@@ -13,20 +13,43 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-card >
+  <ion-card>
     <img [src]="restaurant.img" class="rounded-top shadow mx-auto d-block"/>
     <ion-card-header>
-      <ion-card-subtitle>{{restaurant.description}}</ion-card-subtitle>
+      <ion-item>
+        <ion-card-subtitle>{{restaurant.description}}</ion-card-subtitle>
+      </ion-item>
     </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label position="floating" >Inserisci il numero</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
   </ion-card>
+
+  <ion-text class="ion-text-center">
+    <h1 class="color-medium">Desideri prenotare?</h1>
+    <p>compila il modulo e attendi la conferma</p>
+  </ion-text>
+  <div class="m-3">
+    <form [formGroup]="booking" (ngSubmit)="onBooking()">
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Inserisci il numero di telefono</ion-label>
+        <ion-input type="number" formControlName="phoneNumber"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Per quante persone?</ion-label>
+        <ion-input type="number" formControlName="numberPerson"></ion-input>
+      </ion-item>
+      <div class="ion-margin">
+        <ion-label>Seleziona il giorno</ion-label>
+        <ion-datetime presentation="date" display-format="DD-MM-YYYY" size="cover" formControlName="date" [min]="minDate.toISOString().slice(0, 10)" [max]="maxDate.toISOString().slice(0, 10)"></ion-datetime>
+      </div>
+      <div class="ion-margin">
+        <ion-label>Seleziona l'ora</ion-label>
+        <ion-datetime presentation="time" display-format="HH:mm" formControlName="time" locale="it-IT" minuteValues="0,15,30,45"></ion-datetime>
+      </div>
+      <div class="ion-text-center ion-margin-top">
+        <ion-button color="primary" type="submit" [disabled]="!booking.valid">
+          Prenota
+        </ion-button>
+      </div>
+    </form>
+  </div>
 
 </ion-content>

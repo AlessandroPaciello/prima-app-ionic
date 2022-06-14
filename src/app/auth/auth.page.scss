@@ -1,3 +1,9 @@
 .min-width{
   width: min-content !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.ion-valid.ion-touched ion-label{
+  color: var(--ion-color-success);
 }

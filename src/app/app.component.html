@@ -20,14 +20,15 @@
         </ion-item>
       </ion-menu-toggle>
 
-      <ion-item>
-        <ion-menu-toggle>
+
+      <ion-menu-toggle *ngIf="account.accountIsAuth">
+        <ion-item>
           <ion-button (click)="logOut()" expand="block" fill="clear" shape="round" menuClose>
             <ion-icon name="log-out-outline"></ion-icon>
             <ion-label class="ion-padding-start">LogOut</ion-label>
           </ion-button>
-        </ion-menu-toggle>
-      </ion-item>
+        </ion-item>
+      </ion-menu-toggle>
     </ion-content>
   </ion-menu>
 

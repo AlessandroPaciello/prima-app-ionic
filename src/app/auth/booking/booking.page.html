@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/restaurants"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Booking</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let booking of account.user.booking">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-text color="medium">
+            Nome: <span><ion-text color="dark">{{booking.restaurant.name}}</ion-text></span>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text color="medium">
+            Numero Persone: <span><ion-text color="dark">{{booking.numberPerson}}</ion-text></span>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text color="medium">
+            il giorno : <span><ion-text color="dark">{{booking.date}}</ion-text></span>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text color="medium">
+            alle ore : <span><ion-text color="dark">{{booking.time}}</ion-text></span>
+          </ion-text>
+        </ion-item>
+        <ion-item >
+          <ion-text color="medium">
+            stato : <span><ion-text [color]="stateColor(booking)" >{{booking.state}}</ion-text></span>
+          </ion-text>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

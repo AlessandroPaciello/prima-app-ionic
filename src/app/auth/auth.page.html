@@ -12,34 +12,88 @@
 
 <ion-content>
   <ion-card>
-    <div *ngIf="!account.accountIsAuth" >
-      <div *ngIf="loading" class="ion-text-center ion-padding">
-        <ion-spinner name="bubbles"></ion-spinner>
+    <ion-card-content>
+      <form [formGroup]="userLogin" (ngSubmit)="login()" >
+        <ion-list *ngIf="!account.accountIsAuth">
+          <ion-item class="ion-margin">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <div>
+            <div class="ion-text-center ion-padding">
+              <ion-button  type="submit" [disabled]="!userLogin.valid">
+                <ion-icon name="person-outline"></ion-icon>
+                <ion-label class="ion-padding-start">Login</ion-label>
+              </ion-button>
+            </div>
+          </div>
+          <div *ngIf="!userLogin.controls.email.valid && userLogin.touched">
+            <ion-text color="danger" class="ion-text-center">
+              <p>inserisci un email valida</p>
+            </ion-text>
+          </div>
+          <div *ngIf="!userLogin.controls.password.valid && userLogin.touched">
+            <ion-text color="danger" class="ion-text-center">
+              <p>inserisci una password di alemno 3 caratteri</p>
+            </ion-text>
+          </div>
+        </ion-list>
+      </form>
+      <!-- se è stato effetuato il login visualizza la card con i dati dell' utente -->
+
+      <div *ngIf="account.accountIsAuth">
+        <ion-avatar class="mx-auto d-block m-4">
+          <ion-img [src]="account.user.img"></ion-img>
+        </ion-avatar>
+        <div>
+          <ion-item class="ion-no-padding">
+            <ion-text color="medium">
+              Nome: <span><ion-text color="dark">{{account.user.name}}</ion-text></span>
+            </ion-text>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-text color="medium">
+              Cognome:
+              <span>
+                <ion-text  color="dark">
+                  {{account.user.lastName}}
+                </ion-text>
+              </span>
+            </ion-text>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-text color="medium">
+              età:
+              <span>
+                <ion-text color="dark">
+                  {{account.user.age}}
+                </ion-text>
+              </span>
+            </ion-text>
+          </ion-item>
+          <ion-item class="ion-no-padding" detail="" [routerLink]="['./', 'booking']">
+            <ion-text color="medium">
+              numero prenotazioni:
+              <span>
+                <ion-text color="dark">
+                  {{account.user.booking.length}}
+                </ion-text>
+              </span>
+            </ion-text>
+          </ion-item>
+          <ion-item class="ion-no-padding">
+            <ion-button (click)="logOut()" expand="block" fill="clear" shape="round">
+              <ion-icon name="log-out-outline"></ion-icon>
+              <ion-label class="ion-padding-start">LogOut</ion-label>
+            </ion-button>
+          </ion-item>
+        </div>
       </div>
-      <div *ngIf="!loading" class="ion-text-center ion-padding">
-        <ion-button (click)="login()">
-          <ion-icon name="person-outline"></ion-icon>
-          <ion-label class="ion-padding-start">Login</ion-label>
-        </ion-button>
-      </div>
-    </div>
-    <div *ngIf="account.accountIsAuth">
-      <ion-avatar class="mx-auto d-block m-4">
-        <ion-img [src]="account.img"></ion-img>
-      </ion-avatar>
-      <ion-item>
-        <ion-label>{{account.name}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{account.lastName}}</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-button (click)="logOut()" expand="block" fill="clear" shape="round">
-          <ion-icon name="log-out-outline"></ion-icon>
-          <ion-label class="ion-padding-start">LogOut</ion-label>
-        </ion-button>
-      </ion-item>
-    </div>
+    </ion-card-content>
   </ion-card>
 
 </ion-content>

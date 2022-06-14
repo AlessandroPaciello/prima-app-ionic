@@ -2,8 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
-import { Restaurant } from '../service/restaurant.model';
-import { RestaurantService } from '../service/restaurant.service';
+import { Restaurant } from '../service/restaurant/restaurant.model';
+import { RestaurantService } from '../service/restaurant/restaurant.service';
 
 @Component({
   selector: 'app-restaurants',

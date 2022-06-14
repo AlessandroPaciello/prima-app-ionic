@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +13,7 @@ import { RestaurantsPage } from './restaurants.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RestaurantsPageRoutingModule
+    RestaurantsPageRoutingModule,
   ],
   declarations: [RestaurantsPage]
 })

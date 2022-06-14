@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AcountService } from './auth/acount-service.service';
+import { AccountService} from './service/user/account-service.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import { AcountService } from './auth/acount-service.service';
 })
 export class AppComponent {
 
-  private _isLogged = false;
+  private _account: AccountService;
 
-  constructor(private navCtrl: NavController, private accountService: AcountService) {
-    this._isLogged = this.accountService.accountIsAuth;
+  constructor(private navCtrl: NavController, private accountService: AccountService) {
+    this._account = this.accountService;
   }
 
   changeRoot(path: string) {
@@ -26,7 +26,7 @@ export class AppComponent {
     this.navCtrl.navigateBack('restaurants');
   }
 
-  get isLogged() {
-    return this._isLogged;
+  get account() {
+    return this._account;
   }
 }

@@ -4,7 +4,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, NavController } from '@ionic/angular';
-import { AccountService} from '../service/user/account-service.service';
+import { take } from 'rxjs/operators';
+import { AccountService } from '../service/user/account-service.service';
 
 @Component({
   selector: 'app-auth',
@@ -17,6 +18,7 @@ export class AuthPage implements OnInit {
   loading = false;
 
   userLogin: FormGroup;
+  private _bookingCount: number;
 
   constructor(private accountService: AccountService, private navCtrl: NavController, private formBuilder: FormBuilder, private loadingController: LoadingController) {
   }
@@ -28,6 +30,12 @@ export class AuthPage implements OnInit {
     this.userLogin = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.minLength(3)]],
+    });
+  }
+
+  ionViewWillEnter() {
+    this.accountService.user.booking.pipe(take(1)).subscribe((bookingArray) => {
+      this._bookingCount = bookingArray.length;
     });
   }
 
@@ -55,4 +63,7 @@ export class AuthPage implements OnInit {
     return this._account;
   }
 
+  public get bookingCount(): number {
+    return this._bookingCount;
+  }
 }

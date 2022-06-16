@@ -1,30 +1,41 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { find, map, take } from 'rxjs/operators';
 import { Restaurant } from './restaurant.model';
-import * as Rx from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  private _restaurants: Restaurant[] = [
-    new Restaurant('01', 'Fronte Mare', 'Ottima vista e ottimi piatti', 'https://media-cdn.tripadvisor.com/media/photo-s/1d/1c/79/23/ristorante-fronte-mare.jpg'),
-    new Restaurant('02', 'Primo', 'Bellissimo ristorante situato vicino al fossato', 'https://scontent.fbri1-1.fna.fbcdn.net/v/t1.6435-9/106031928_113584687075014_6491738107848043018_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=EDEmYShjzqoAX9DiBJT&_nc_ht=scontent.fbri1-1.fna&oh=00_AT9QPkDxX9VwqdKvDB4UcWgktRvq5cmj-lpPbgUw4_8eeQ&oe=62C4D329')
-  ];
+  private _restaurants: BehaviorSubject<Restaurant[]>;
 
   constructor() {
+    this._restaurants = new BehaviorSubject<Restaurant[]>([]);
   }
 
-  get restaurants() {
+  get restaurants(): Observable<Restaurant[]>{
     // eslint-disable-next-line no-underscore-dangle
-    return this._restaurants;
+    return this._restaurants.asObservable();
   }
 
   find(id: string): Restaurant {
     // eslint-disable-next-line arrow-body-style
-    const rest = this.restaurants.find((restaurant) => { return restaurant.restaurantId === id;});
-    return rest;
+
+    let findRestaurant: Restaurant;
+    this.restaurants.pipe(take(1), map((restaurants) => { return restaurants.find( restaurant => restaurant.restaurantId === id);})).subscribe((restaurant) => {
+      findRestaurant = restaurant;
+    });
+    return findRestaurant;
+  }
+
+  addRestaurant(...restaurant: Restaurant[]) {
+    this._restaurants.pipe(take(1)).subscribe( (restaurants) => {
+      this._restaurants.next(restaurants.concat(restaurant));
+    });
   }
 
 

@@ -14,14 +14,14 @@
       <ion-col>
         <ion-list>
           <ion-list>
-            <ion-item-sliding *ngFor="let restaurant of restaurant" [routerLink]="['/', 'restaurants', restaurant.restaurantId]" routerDirection="forward" detail="">
+            <ion-item-sliding *ngFor="let restaurant of restaurants"  routerDirection="forward" detail="">
               <ion-item-options side="end">
                 <ion-item-option color="primary">
                   <ion-icon slot="start" name="add"></ion-icon>
                   add
                 </ion-item-option>
               </ion-item-options>
-              <ion-item >
+              <ion-item [routerLink]="['/', 'restaurants', restaurant.restaurantId]">
                 <ion-thumbnail>
                   <img [src]="restaurant.img"/>
                 </ion-thumbnail>

@@ -4,7 +4,7 @@
 import { Restaurant } from "../restaurant/restaurant.model";
 
 export interface Booking {
-  id: number;
+  id?: number;
   date: string;
   time: string;
   numberPerson: number;

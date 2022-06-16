@@ -30,6 +30,9 @@
                 <ion-label class="ion-padding-start">Login</ion-label>
               </ion-button>
             </div>
+            <div class="ion-text-center">
+              <a [routerLink]="['./', 'signup']">registrati</a>
+            </div>
           </div>
           <div *ngIf="!userLogin.controls.email.valid && userLogin.touched">
             <ion-text color="danger" class="ion-text-center">
@@ -80,7 +83,7 @@
               numero prenotazioni:
               <span>
                 <ion-text color="dark">
-                  {{account.user.booking.length}}
+                  {{bookingCount}}
                 </ion-text>
               </span>
             </ion-text>
